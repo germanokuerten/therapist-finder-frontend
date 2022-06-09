@@ -19,7 +19,7 @@ export default function Main () {
         <div>
             <Routes>
                 <Route path="/therapists" element={
-                    <Index />}>
+                    <Index therapists={therapists} />}>
                 </Route>
                 <Route path="/therapists/:id" element={
                     <Show />}>
