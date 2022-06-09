@@ -22,7 +22,7 @@ export default function Main () {
                     <Index therapists={therapists} />}>
                 </Route>
                 <Route path="/therapists/:id" element={
-                    <Show />}>
+                    <Show therapists={therapists}/>}>
                 </Route>
             </Routes>
         </div>

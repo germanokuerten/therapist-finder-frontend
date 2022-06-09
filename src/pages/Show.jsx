@@ -1,8 +1,41 @@
-export default function Show () {
+import { useParams } from "react-router"
+import Reviews from "../components/Reviews"
+
+export default function Show ({therapists}) {
+    
+    const { id } = useParams()
+
+    const therapist = therapists?.find((therapist)=> therapist._id === id)
+    console.log(therapist)
+    
+
+
     return (
-        <div className="">
-            <h1>Show</h1>
-            
+        <div className="show-wrapper">
+            <h1>{therapist.Name}</h1>
+            <div>
+                <img style={{maxWidth:"100px"}} src={therapist.Portrait} alt={therapist.Name} />
+            </div>
+            <div className="description">
+                <h2>About me</h2>
+                <p>{therapist.Description}</p>
+            </div>
+            <div className="specialties">
+                <h2>Specialties</h2>
+                <ul>
+                    {therapist.tags.map(tag=>{
+                        return(
+                            <li key={tag}>{tag}</li>
+                        )
+                    })}
+                </ul>
+            </div>
+            <div className="contact">
+                    <h2>Contact Information</h2>
+                    <p>{therapist.PhoneNumber}</p>
+                    <p>{therapist.Adress}</p>
+            </div>
+            <Reviews reviews={therapist.reviews}/>
         </div>
     )
 }
