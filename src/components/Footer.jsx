@@ -1,5 +1,8 @@
 export default function Footer () {
     return (
-        <h1>Footer</h1>
+        <div className="footer">
+            <h1>Therapist Finder Today</h1>
+            <h2>Social media links here</h2>
+        </div>
     )
 }
