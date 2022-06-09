@@ -1,16 +1,17 @@
 import { Link } from "react-router-dom"
 
 export default function Index ({therapists}) {
+    console.log(therapists)
     const loaded= () =>{
 
         return(
             <div >
                 {therapists.map(therapists => {
                     return(
-                    <Link to={`/therapists/${therapists._id}`}>
-                        <div key={therapists.Name}>
-                            <img src={therapists.Portrait} alt={therapists.Name} style={{maxWidth:"100px"}} />
-                            <h2>{therapists.Name}</h2>
+                    <Link key={therapists.name} to={`/therapists/${therapists._id}`}>
+                        <div>
+                            <img src={therapists.portrait} alt={therapists.name} style={{maxWidth:"100px"}} />
+                            <h2>{therapists.name}</h2>
                             <h4> Specialty: {therapists.tags}</h4>    
                         </div>
                     </Link>

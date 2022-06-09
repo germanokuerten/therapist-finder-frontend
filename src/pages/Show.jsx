@@ -12,13 +12,13 @@ export default function Show ({therapists}) {
 
     return (
         <div className="show-wrapper">
-            <h1>{therapist.Name}</h1>
+            <h1>{therapist.name}</h1>
             <div>
-                <img style={{maxWidth:"100px"}} src={therapist.Portrait} alt={therapist.Name} />
+                <img style={{maxWidth:"100px"}} src={therapist.portrait} alt={therapist.name} />
             </div>
             <div className="description">
                 <h2>About me</h2>
-                <p>{therapist.Description}</p>
+                <p>{therapist.description}</p>
             </div>
             <div className="specialties">
                 <h2>Specialties</h2>
@@ -32,8 +32,8 @@ export default function Show ({therapists}) {
             </div>
             <div className="contact">
                     <h2>Contact Information</h2>
-                    <p>{therapist.PhoneNumber}</p>
-                    <p>{therapist.Adress}</p>
+                    <p>{therapist.phoneNumber}</p>
+                    <p>{therapist.address}</p>
             </div>
             <Reviews reviews={therapist.reviews}/>
         </div>

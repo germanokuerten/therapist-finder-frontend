@@ -1,5 +1,7 @@
 export default function Reviews({reviews}){
 
+    
+
     function handleDelete(){
 
     }
@@ -14,12 +16,13 @@ export default function Reviews({reviews}){
     return(
         <div className="review-wrapper">
             <h1>Reviews</h1>
-            {reviews.map(review=>{
+            {reviews.map((review,i)=>{
                 return(
-                    <div className="review-card">
+                    <div key={i} className="review-card">
                         <p>{review.review}</p>
                         <div className="review-stars">
                             <p>{review.rating}</p>
+                            <p>{review._id}</p>
                         </div>
                         <button onClick={handleEdit}>edit</button>
                         <button onClick={handleDelete}>delete</button>
