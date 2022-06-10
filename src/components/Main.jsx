@@ -10,6 +10,36 @@ export default function Main () {
         const data= await fetch(url+"therapists").then(res => res.json())
         setTherapists(data)
     } 
+
+    const createReview = async (therapists, id) =>{
+        await fetch (URL+"therapists"+id, {
+            method: "POST",
+            headers: {
+                "Content-Type": "Application/json",
+            },
+            body: JSON.stringify(therapists),
+        })
+        getTherapists()
+    }
+
+    const updateReview = async (therapists, id) =>{
+        await fetch (URL+"therapists"+id, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "Application/json",
+            },
+            body: JSON.stringify(therapists)
+        })
+        getTherapists()
+    }
+
+    const deleteReview = async (id)=>{
+        await fetch (URL+"therapists"+id,{
+            method: "DELETE",
+        })
+        getTherapists()
+    }
+
     useEffect(()=>{
         getTherapists()   
     },[])
@@ -22,7 +52,7 @@ export default function Main () {
                     <Index therapists={therapists} />}>
                 </Route>
                 <Route path="/therapists/:id" element={
-                    <Show therapists={therapists}/>}>
+                    <Show therapists={therapists} createReview={createReview} updateReview={updateReview} deleteReview={deleteReview}/>}>
                 </Route>
             </Routes>
         </div>

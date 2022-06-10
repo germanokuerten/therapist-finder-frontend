@@ -8,9 +8,9 @@ export default function Index ({therapists}) {
                 {therapists.map(therapists => {
                     return(
                     <Link to={`/therapists/${therapists._id}`}>
-                        <div key={therapists.Name}>
-                            <img src={therapists.Portrait} alt={therapists.Name} style={{maxWidth:"100px"}} />
-                            <h2>{therapists.Name}</h2>
+                        <div key={therapists.name}>
+                            <img src={therapists.portrait} alt={therapists.name} style={{maxWidth:"100px"}} />
+                            <h2>{therapists.name}</h2>
                             <h4> Specialty: {therapists.tags}</h4>    
                         </div>
                     </Link>
