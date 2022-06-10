@@ -1,12 +1,11 @@
 import { useParams } from "react-router"
 import Reviews from "../components/Reviews"
 
-export default function Show ({therapists, createReview, updateReview, deleteReview}) {
+export default function Show ({therapists, createReview, updateReview, deleteReview, url, getTherapists}) {
     
     const { id } = useParams()
 
     const therapist = therapists?.find((therapist)=> therapist._id === id)
-    console.log(therapist)
     
 
 
@@ -35,7 +34,12 @@ export default function Show ({therapists, createReview, updateReview, deleteRev
                     <p>{therapist.phoneNumber}</p>
                     <p>{therapist.adress}</p>
             </div>
-            <Reviews reviews={therapist.reviews}/>
+            <Reviews reviews={therapist.reviews}
+            //  createReview={createReview} updateReview={updateReview} deleteReview={deleteReview} 
+            url={url}
+            getTherapists={getTherapists}
+            id={id}
+            />
         </div>
     )
 }

@@ -1,58 +1,103 @@
 import { useState } from "react";
 
 
-export default function Reviews({reviews, createReview, updateReview, deleteReview}){
+export default function Reviews({reviews,
+    //  createReview, updateReview, deleteReview,
+      url}){
+    
+        const[rvws, setRvws]=useState(null)
 
-    function handleDelete(){
-
+        const getReviews= async () =>{
+            const rvwsData= await fetch(url + "therapists").then(res => res.json())
+            setRvws(rvwsData)
+        } 
+    const createReview = async (rvws) =>{
+        await fetch (url + "therapists/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "Application/json",
+            },
+            body: JSON.stringify(rvws),
+        })
+        getReviews()
+        console.log("therapist is: ", rvws)
     }
-    function handleEdit(){
 
+    const updateReview = async (rvws, id) =>{
+        await fetch (url + "therapists/" + id, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "Application/json",
+            },
+            body: JSON.stringify(rvws)
+        })
+        getReviews()
     }
-    function handleSubmit(){
 
+    const deleteReview = async (id)=>{
+        await fetch (url + id,{
+            method: "DELETE",
+        })
+        getReviews()
+        console.log("id is: ", id)
     }
-    function handleChange(){
+    // function handleDelete(){
 
-    }
-    // const [newForm, setNewForm] = useState({
-    //     review: ""
-    // })
-    // const [editForm, setEditForm] = useState(reviews._id) 
+    // }
+    // function handleEdit(){
+
+    // }
+    // function handleSubmit(){
+
+    // }
+    // function handleChange(){
+
+    // }
+    const [newForm, setNewForm] = useState({
+        review: "hello",
+        rating: 5
+    })
+    const [editForm, setEditForm] = useState(reviews._id) 
 
     // function handleDelete(){
     //     deleteReview(reviews._id);
     // }
-    // function handleEdit(event){
-    //     setEditForm((prevState)=>({
-    //         ...prevState,
-    //         [event.target.name]: event.target.value
-    //     }))
-    // }
-    // const handleChange = (event)=>{
-    //     setNewForm((prevState)=>({
-    //         ...prevState,
-    //         [event.target.name]: event.target.value,
-    //     }))
-    // }
-    // function handleSubmit(event){
-    //     event.preventDefault()
-    //     createReview(newForm)
-    //     setNewForm({
-    //         review: ""
-    //     })
-    // }
+    console.log(reviews.review)
 
-    // const handleSubmitEdit = (event)=>{
-    //     event.preventDefault()
-    //     updateReview(editForm, reviews._id)
-    // }
+    function handleEdit(event){
+        setEditForm((prevState)=>({
+            ...prevState,
+            [event.target.name]: event.target.value
+        }))
+    }
+    const handleChange = (event)=>{
+        setNewForm((prevState)=>({
+            ...prevState,
+            [event.target.name]: event.target.value,
+        }))
+    }
+    function handleSubmit(event){
+        event.preventDefault()
+        createReview(newForm)
+        setNewForm({
+            review: "",
+            rating: 5
+        })
+    }
+
+    const handleSubmitEdit = (event)=>{
+        event.preventDefault()
+        updateReview(editForm, reviews._id)
+    }
 
 
     return(
         <div className="review-wrapper">
             <h1>Reviews</h1>
             {reviews.map((review)=>{
+                function handleDelete(){
+                    deleteReview(review._id);
+                }
                 return(
                     <div key={review._id} className="review-card">
                         <p>{review.review}</p>
@@ -87,6 +132,5 @@ export default function Reviews({reviews, createReview, updateReview, deleteRevi
                 <button type="submit">Submit</button>           
             </form>
         </div>
-        
     )
 }
