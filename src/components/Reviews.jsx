@@ -1,6 +1,18 @@
-export default function Reviews({reviews}){
+import { useState } from "react"
 
-    
+export default function Reviews({reviews, createReview, id}){
+    const [review, setReview] = useState({
+        rating: "5",
+        review: ""
+    })
+
+    function handleChange(event){
+        const updatedReview = {
+            ...review,
+            [event.target.name]: event.target.value
+        }
+        setReview(updatedReview)
+    }
 
     function handleDelete(){
 
@@ -8,8 +20,15 @@ export default function Reviews({reviews}){
     function handleEdit(){
 
     }
-    function handleSubmit(){
-
+    // console.log(review)
+    // console.log(id)
+    function handleSubmit(event){
+        event.preventDefault()
+        createReview(id,review)
+        setReview({
+            rating: "5",
+            review: ""
+        })
     }
 
 
@@ -33,7 +52,12 @@ export default function Reviews({reviews}){
             <br />
             <form onSubmit={handleSubmit}>
             <label htmlFor="rating">Rating</label>
-                <select name="rating" id="rating">
+                <select 
+                    name="rating" 
+                    id="rating"
+                    value={review.rating}
+                    onChange={handleChange}
+                >
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -46,6 +70,8 @@ export default function Reviews({reviews}){
                     type="text"
                     name="review"
                     placeholder="review"
+                    value={review.review}
+                    onChange={handleChange}
                 />
                 <button type="submit">Submit</button>           
             </form>
