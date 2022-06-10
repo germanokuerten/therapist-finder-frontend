@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom"
 
 export default function Index ({therapists}) {
+
+    //add search for therapists
+    //
     console.log(therapists)
     const loaded= () =>{
 
