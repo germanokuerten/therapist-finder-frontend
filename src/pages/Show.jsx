@@ -1,15 +1,13 @@
 import { useParams } from "react-router"
 import Reviews from "../components/Reviews"
 
-export default function Show ({therapists, createReview, updateReview, deleteReview}) {
-    
+export default function Show ({therapists, createReview, deleteReview, updateReview}) {
+   
     const { id } = useParams()
 
     const therapist = therapists?.find((therapist)=> therapist._id === id)
-    console.log(therapist)
+    // console.log(therapist)
     
-
-
     return (
         <div className="show-wrapper">
             <h1>{therapist.name}</h1>
@@ -33,9 +31,15 @@ export default function Show ({therapists, createReview, updateReview, deleteRev
             <div className="contact">
                     <h2>Contact Information</h2>
                     <p>{therapist.phoneNumber}</p>
-                    <p>{therapist.adress}</p>
+                    <p>{therapist.address}</p>
             </div>
-            <Reviews reviews={therapist.reviews}/>
+            <Reviews 
+                id={id}
+                reviews={therapist.reviews}
+                createReview={createReview}
+                deleteReview={deleteReview}
+                updateReview={updateReview}
+            />
         </div>
     )
 }

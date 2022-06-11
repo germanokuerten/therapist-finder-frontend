@@ -2,60 +2,105 @@ import { Route, Routes } from "react-router-dom"
 import { useState,useEffect } from "react"
 import Index from "../pages/Index"
 import Show from "../pages/Show"
+import Landing from "../pages/Landing"
+import About from "../pages/About"
 
 export default function Main () {
     const [therapists,setTherapists]=useState(null)
-    const url="https://therapist-finder-backend.herokuapp.com/"
+    // const url = "http://localhost:3001/"
+    const url="https://therapist-rojas.herokuapp.com/"
+    
     const getTherapists= async () =>{
         const data= await fetch(url+"therapists").then(res => res.json())
         setTherapists(data)
     } 
-
-    const createReview = async (therapists, id) =>{
-        await fetch (URL+"therapists"+id, {
-            method: "POST",
-            headers: {
-                "Content-Type": "Application/json",
-            },
-            body: JSON.stringify(therapists),
-        })
-        getTherapists()
+    
+    // function that posts to create a review
+    // fetch the url
+    // 
+    /// WHY DOESN'T THIS WORK?!??!?
+    // async function createReview(id,reviewData){
+    //     await console.log(`${url}therapists/review/${id}`)
+    // }
+    const createReview = async (id,reviewData)=>{
+         await console.log(`${url}therapists/review/${id}`)
+        try {
+            await fetch(`${url}therapists/review/${id}`,{
+                method: 'POST',
+                headers: {
+                    'Content-Type' : 'Application/json'
+                },
+                body: JSON.stringify(reviewData)
+            })
+            getTherapists()
+        } catch (error) {
+            console.log(error)
+        }
     }
 
-    const updateReview = async (therapists, id) =>{
-        await fetch (URL+"therapists"+id, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "Application/json",
-            },
-            body: JSON.stringify(therapists)
-        })
-        getTherapists()
+    // Delete 
+    const deleteReview = async (therapistId, reviewId)=>{
+        try {
+            await fetch(`${url}therapists/review/${therapistId}/${reviewId}`, {
+                method: "DELETE",
+            })    
+            getTherapists()
+        } catch (error) {
+            console.log(error)
+        }
     }
 
-    const deleteReview = async (id)=>{
-        await fetch (URL+"therapists"+id,{
-            method: "DELETE",
-        })
-        getTherapists()
+    // Update
+    const updateReview = async (therapistId, reviewId, newReviewData) => {
+        try {
+            await fetch(`${url}therapists/review/${therapistId}/${reviewId}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "Application/json",
+                },
+                body: JSON.stringify(newReviewData)
+            })
+            getTherapists()
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     useEffect(()=>{
         getTherapists()   
     },[])
-    console.log(therapists);
+    // console.log(therapists);
     
-    return (
+    const loaded=()=>(
         <div>
             <Routes>
-                <Route path="/therapists" element={
-                    <Index therapists={therapists} />}>
-                </Route>
-                <Route path="/therapists/:id" element={
-                    <Show therapists={therapists} createReview={createReview} updateReview={updateReview} deleteReview={deleteReview}/>}>
-                </Route>
+
+                <Route 
+                    path="/"
+                    element={<Landing/>}
+                />
+                <Route 
+                    path="/therapists" 
+                    element={<Index therapists={therapists} />}
+                />
+                <Route 
+                    path="/therapists/:id" 
+                    element={<Show 
+                                therapists={therapists}
+                                createReview={createReview}
+                                deleteReview={deleteReview}
+                                updateReview={updateReview}
+                            />}
+                />
+                <Route 
+                    path="/about" 
+                    element={<About/>}
+                />
+
             </Routes>
         </div>
-        
     )
+    const loading=()=>(<h1>loading... </h1>)
+
+    return therapists ? loaded() : loading()
 }
