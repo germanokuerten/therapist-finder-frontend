@@ -1,11 +1,11 @@
 import { useState } from "react"
 
-export default function Reviews({reviews, createReview, id}){
+export default function Reviews({reviews, createReview, id, deleteReview, updatedReview}){
     const [review, setReview] = useState({
         rating: "5",
         review: ""
     })
-
+    // console.log(reviews)
     function handleChange(event){
         const updatedReview = {
             ...review,
@@ -14,11 +14,12 @@ export default function Reviews({reviews, createReview, id}){
         setReview(updatedReview)
     }
 
-    function handleDelete(){
-
+    function handleDelete(reviewId){
+        // console.log(reviewId)
+        deleteReview(id, reviewId)
     }
-    function handleEdit(){
-
+    function handleEdit(reviewId){
+        
     }
     // console.log(review)
     // console.log(id)
@@ -41,10 +42,10 @@ export default function Reviews({reviews, createReview, id}){
                         <p>{review.review}</p>
                         <div className="review-stars">
                             <p>{review.rating}</p>
-                            <p>{review._id}</p>
+                            {/* <p>{review._id}</p> */}
                         </div>
                         <button onClick={handleEdit}>edit</button>
-                        <button onClick={handleDelete}>delete</button>
+                        <button onClick={()=>{handleDelete(review._id)}}>delete</button>
                     </div>
                 )
             })}

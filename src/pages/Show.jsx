@@ -1,7 +1,7 @@
 import { useParams } from "react-router"
 import Reviews from "../components/Reviews"
 
-export default function Show ({therapists, createReview}) {
+export default function Show ({therapists, createReview, deleteReview, updateReview}) {
     
     const { id } = useParams()
 
@@ -39,6 +39,8 @@ export default function Show ({therapists, createReview}) {
                 id={id}
                 reviews={therapist.reviews}
                 createReview={createReview}
+                deleteReview={deleteReview}
+                updateReview={updateReview}
             />
         </div>
     )

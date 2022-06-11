@@ -7,8 +7,8 @@ import About from "../pages/About"
 
 export default function Main () {
     const [therapists,setTherapists]=useState(null)
-    const url = "http://localhost:3001/"
-    // const url="https://therapist-rojas.herokuapp.com/"
+    // const url = "http://localhost:3001/"
+    const url="https://therapist-rojas.herokuapp.com/"
     
     const getTherapists= async () =>{
         const data= await fetch(url+"therapists").then(res => res.json())
@@ -37,6 +37,35 @@ export default function Main () {
             console.log(error)
         }
     }
+
+    // Delete 
+    const deleteReview = async (therapistId, reviewId)=>{
+        try {
+            await fetch(`${url}therapists/review/${therapistId}/${reviewId}`, {
+                method: "DELETE",
+            })    
+            getTherapists()
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    // Update
+    const updateReview = async (therapistId, reviewId, newReviewData) => {
+        try {
+            await fetch(`${url}therapists/review/${therapistId}/${reviewId}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "Application/json",
+                },
+                body: JSON.stringify(newReviewData)
+            })
+            getTherapists()
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     
 
 
@@ -61,6 +90,8 @@ export default function Main () {
                     element={<Show 
                                 therapists={therapists}
                                 createReview={createReview}
+                                deleteReview={deleteReview}
+                                updateReview={updateReview}
                             />}
                 />
                 <Route 
