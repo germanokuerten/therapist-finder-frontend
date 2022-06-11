@@ -66,9 +66,6 @@ export default function Main () {
         }
     }
 
-    
-
-
     useEffect(()=>{
         getTherapists()   
     },[])
@@ -77,6 +74,7 @@ export default function Main () {
     const loaded=()=>(
         <div>
             <Routes>
+
                 <Route 
                     path="/"
                     element={<Landing/>}
@@ -98,6 +96,7 @@ export default function Main () {
                     path="/about" 
                     element={<About/>}
                 />
+
             </Routes>
         </div>
     )

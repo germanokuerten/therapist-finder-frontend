@@ -125,11 +125,47 @@ export default function Reviews({reviews, createReview, id, deleteReview, update
         
         return switcher.boolean && switcher.id == reviewId
     }
+    function handleChange(){
+
+    }
+    // const [newForm, setNewForm] = useState({
+    //     review: ""
+    // })
+    // const [editForm, setEditForm] = useState(reviews._id) 
+
+    // function handleDelete(){
+    //     deleteReview(reviews._id);
+    // }
+    // function handleEdit(event){
+    //     setEditForm((prevState)=>({
+    //         ...prevState,
+    //         [event.target.name]: event.target.value
+    //     }))
+    // }
+    // const handleChange = (event)=>{
+    //     setNewForm((prevState)=>({
+    //         ...prevState,
+    //         [event.target.name]: event.target.value,
+    //     }))
+    // }
+    // function handleSubmit(event){
+    //     event.preventDefault()
+    //     createReview(newForm)
+    //     setNewForm({
+    //         review: ""
+    //     })
+    // }
+
+    // const handleSubmitEdit = (event)=>{
+    //     event.preventDefault()
+    //     updateReview(editForm, reviews._id)
+    // }
 
 
     return(
         <div className="review-wrapper">
             <h1>Reviews</h1>
+
             {reviews.map((review,i)=>{
                 return(
                     <div key={i} className="review-card">
@@ -163,6 +199,7 @@ export default function Reviews({reviews, createReview, id, deleteReview, update
                 <input 
                     type="text"
                     name="review"
+                    value={reviews.review}
                     placeholder="review"
                     value={review.review}
                     onChange={handleChange}

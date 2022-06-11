@@ -2,14 +2,12 @@ import { useParams } from "react-router"
 import Reviews from "../components/Reviews"
 
 export default function Show ({therapists, createReview, deleteReview, updateReview}) {
-    
+   
     const { id } = useParams()
 
     const therapist = therapists?.find((therapist)=> therapist._id === id)
     // console.log(therapist)
     
-
-
     return (
         <div className="show-wrapper">
             <h1>{therapist.name}</h1>
