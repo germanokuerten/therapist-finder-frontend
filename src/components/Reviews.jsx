@@ -1,6 +1,14 @@
 import { useState } from "react"
 
 export default function Reviews({reviews, createReview, id, deleteReview, updatedReview}){
+
+    // let switcher = false 
+
+    const [switcher, setSwitcher] = useState({
+        boolean: false,
+        id: ""
+    })
+
     const [review, setReview] = useState({
         rating: "5",
         review: ""
@@ -18,11 +26,19 @@ export default function Reviews({reviews, createReview, id, deleteReview, update
         // console.log(reviewId)
         deleteReview(id, reviewId)
     }
-    function handleEdit(reviewId){
-        
+
+
+    function handleRender(reviewId){
+        // console.log(reviewId);
+        setSwitcher({
+            boolean: true,
+            id: reviewId
+        })
+        console.log(switcher);
     }
-    // console.log(review)
-    // console.log(id)
+
+    
+
     function handleSubmit(event){
         event.preventDefault()
         createReview(id,review)
@@ -32,14 +48,54 @@ export default function Reviews({reviews, createReview, id, deleteReview, update
         })
     }
 
+    function handleEditSubmit(event){
+        
+        setSwitcher({
+            ...switcher,
+            boolean: true
+        })
+    }
 
-    function reviewBody(){
+    function reviewBody(review,rating){
         return(
             <>
-            <p>{review.review}</p>
+            <p>{review}</p>
             <div className="review-stars">
-            <p>{review.rating}</p>
+            <p>{rating}</p>
             </div>
+            </>
+        )
+    }
+
+
+    function reviewEditForm(review,rating){
+        return(
+            <>
+                <form onSubmit={handleEditSubmit}>
+                <label htmlFor="rating">Rating</label>
+                <select 
+                    name="rating" 
+                    id="rating"
+                    value={rating}
+                    onChange={handleChange}
+                >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <br />
+                <br />
+                <input 
+                    type="text"
+                    name="review"
+                    placeholder="review"
+                    value={review}
+                    onChange={handleChange}
+                />
+                <button type="submit">Submit</button>
+                </form>
             </>
         )
     }
@@ -51,8 +107,10 @@ export default function Reviews({reviews, createReview, id, deleteReview, update
             {reviews.map((review,i)=>{
                 return(
                     <div key={i} className="review-card">
-                        {reviewBody()}
-                        <button onClick={handleEdit}>edit</button>
+                        {/* if button is clicked render form else render reviewBody */}
+
+                        { switcher.boolean ? reviewEditForm() :reviewBody(review.review,review.rating) }
+                        <button onClick={()=>{handleRender(review._id)}}>edit</button>
                         <button onClick={()=>{handleDelete(review._id)}}>delete</button>
                     </div>
                 )
