@@ -32,26 +32,16 @@ export default function Reviews({reviews, createReview, id, deleteReview, update
         })
     }
 
-
-    function reviewBody(){
-        return(
-            <>
-            <p>{review.review}</p>
-            <div className="review-stars">
-            <p>{review.rating}</p>
-            </div>
-            </>
-        )
-    }
-
-
     return(
         <div className="review-wrapper">
             <h1>Reviews</h1>
             {reviews.map((review,i)=>{
                 return(
                     <div key={i} className="review-card">
-                        {reviewBody()}
+                        <p>{review.review}</p>
+                        <div className="review-stars">
+                        <p>{review.rating}</p>
+                        </div>
                         <button onClick={handleEdit}>edit</button>
                         <button onClick={()=>{handleDelete(review._id)}}>delete</button>
                     </div>
