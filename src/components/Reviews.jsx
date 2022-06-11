@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export default function Reviews({reviews, createReview, id, deleteReview, updatedReview}){
+export default function Reviews({reviews, createReview, id, deleteReview, updateReview}){
 
     // let switcher = false 
 
@@ -13,6 +13,10 @@ export default function Reviews({reviews, createReview, id, deleteReview, update
         rating: "5",
         review: ""
     })
+
+    const [editReview, setEditReview ] = useState({})
+
+
     // console.log(reviews)
     function handleChange(event){
         const updatedReview = {
@@ -22,19 +26,35 @@ export default function Reviews({reviews, createReview, id, deleteReview, update
         setReview(updatedReview)
     }
 
+    function handleEditChange(event){
+        const updatedEditReview = {
+            ... editReview,
+            [event.target.name]: event.target.value
+        }
+        setEditReview(updatedEditReview)
+    }
+
     function handleDelete(reviewId){
         // console.log(reviewId)
         deleteReview(id, reviewId)
     }
 
 
-    function handleRender(reviewId){
+    function handleRender({review,rating,_id}){
         // console.log(reviewId);
+        setEditReview({
+            rating: rating,
+            review: review
+        })
+        //setEditState({
+            // /review
+            // rating
+        // })
         setSwitcher({
             boolean: true,
-            id: reviewId
+            id: _id
         })
-        console.log(switcher);
+        // console.log(switcher);
     }
 
     
@@ -48,15 +68,16 @@ export default function Reviews({reviews, createReview, id, deleteReview, update
         })
     }
 
-    function handleEditSubmit(event){
-        
+    function handleEditSubmit(event,reviewId){
+        event.preventDefault()
+        updateReview(id,reviewId, editReview)
         setSwitcher({
             ...switcher,
-            boolean: true
+            boolean: false
         })
     }
 
-    function reviewBody(review,rating){
+    function reviewBody({review, rating}){
         return(
             <>
             <p>{review}</p>
@@ -68,16 +89,16 @@ export default function Reviews({reviews, createReview, id, deleteReview, update
     }
 
 
-    function reviewEditForm(review,rating){
+    function reviewEditForm({_id}){
         return(
             <>
-                <form onSubmit={handleEditSubmit}>
+                <form onSubmit={(event)=>{handleEditSubmit(event,_id)}}>
                 <label htmlFor="rating">Rating</label>
                 <select 
                     name="rating" 
                     id="rating"
-                    value={rating}
-                    onChange={handleChange}
+                    value={editReview.rating}
+                    onChange={handleEditChange}
                 >
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -91,13 +112,18 @@ export default function Reviews({reviews, createReview, id, deleteReview, update
                     type="text"
                     name="review"
                     placeholder="review"
-                    value={review}
-                    onChange={handleChange}
+                    value={editReview.review}
+                    onChange={handleEditChange}
                 />
                 <button type="submit">Submit</button>
                 </form>
             </>
         )
+    }
+
+    function editSpecificReviewRendering(reviewId){
+        
+        return switcher.boolean && switcher.id == reviewId
     }
 
 
@@ -108,9 +134,10 @@ export default function Reviews({reviews, createReview, id, deleteReview, update
                 return(
                     <div key={i} className="review-card">
                         {/* if button is clicked render form else render reviewBody */}
+                        {/* if review_id === the id of switcher render  */}
 
-                        { switcher.boolean ? reviewEditForm() :reviewBody(review.review,review.rating) }
-                        <button onClick={()=>{handleRender(review._id)}}>edit</button>
+                        { editSpecificReviewRendering(review._id) ? reviewEditForm(review) :reviewBody(review) }
+                        <button onClick={()=>{handleRender(review)}}>edit</button>
                         <button onClick={()=>{handleDelete(review._id)}}>delete</button>
                     </div>
                 )
