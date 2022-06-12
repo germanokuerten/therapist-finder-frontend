@@ -75,7 +75,7 @@ export default function Main () {
     // console.log(therapists);
     
     const loaded=()=>(
-        <div className="test">
+       
 
             <Routes>
                 <Route 
@@ -100,7 +100,7 @@ export default function Main () {
                     element={<About/>}
                 />
             </Routes>
-        </div>
+        
         
     )
     const loading=()=>(<h1>loading... </h1>)

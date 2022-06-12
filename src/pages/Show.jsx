@@ -14,9 +14,11 @@ export default function Show({
 
   return (
     <div className="container">
+        <br />
+        <br />
       <div className="row" >
         <div className="col ">
-          <h1>{therapist.name}</h1>
+          <h1 style={{fontSize:"3em"}}>  <b>{therapist.name}</b></h1>
         </div>
         <div className="col-8">
           
@@ -25,25 +27,25 @@ export default function Show({
       <div className="row">
         <div className="col-4">
           <img
-            style={{ maxWidth: "55%", }}
+            class="img-fluid"
             src={therapist.portrait}
             alt={therapist.name}
           />
         </div>
         <div className="col-8" >
-          <div class="list-group" style={{fontSize:"18px", textAlign:"left"}}>
+          <div className="list-group" style={{fontSize:"18px", textAlign:"left"}}>
             <a
               
-              class="list-group-item list-group-item-action flex-column align-items-start active "
+              className="list-group-item list-group-item-action flex-column align-items-start active "
             >
-              <div class="d-flex w-100 justify-content-between ">
-                <h5 class="mb-1 ">Specialties and Contact information </h5>
+              <div className="d-flex w-100 justify-content-between ">
+                <h5 className="mb-1 ">Specialties and Contact information </h5>
                 
                 <small>rating</small>
                 
               </div>
               <br />
-              <p className="mb-1">
+              <div className="mb-1">
                 <p >
 
                 <b>Focuses</b>: {therapist.tags.join(", ")}
@@ -55,7 +57,7 @@ export default function Show({
                 <p>
                 <b>Phone Number</b>: {therapist.phoneNumber}
                 </p>
-              </p>
+              </div>
 
               <small><b>Title</b>: m.d in psychoterapy</small>
             </a>
