@@ -15,18 +15,18 @@ export default function Nav () {
             </button>
                
                 <div className="collapse navbar-collapse " id="navbarColor03">
-                    <ul className="navbar-nav ms-auto" style={{fontSize:"1.4em", marginRight:"1em"}} >
-                        <li className="nav-item">
+                    <ul className="navbar-nav ms-auto " style={{fontSize:"1.4em", marginRight:"1em"}} >
+                        <li className="nav-item test">
                             <Link className="nav-link active " to="/">Home
                                 <span className="visually-hidden">(current)</span>
                             </Link>
                         </li>
-                        <li className="nav-item">
+                        <li className="nav-item test">
                             <Link className="nav-link active" to="/therapists">Therapists
                                 <span className="visually-hidden">(current)</span>
                             </Link>
                         </li>
-                        <li className="nav-item">
+                        <li className="nav-item test">
                             <Link className="nav-link active" to="/about">About
                                 <span className="visually-hidden">(current)</span>
                             </Link>

@@ -10,7 +10,7 @@ export default function Index({ therapists }) {
           <div className="d-flex justify-content-evenly flex-wrap">
         {therapists.map((therapists, i) => {
           return (
-              <Link className="thercard p-2 bd-highlight" style={{width:"30%"}} to={`/therapists/${therapists._id}`}>
+              <Link className="thercard p-2 bd-highlight " style={{width:"30%"}} to={`/therapists/${therapists._id}`}>
                 <div className="card mb-3" key={i}>
                   <h3 className="card-header">{therapists.name}</h3>
                   <div className="card-body">

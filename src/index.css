@@ -13,12 +13,37 @@ code {
     monospace;
 }
 
+.test {
+  transition: .4s;
+  }
+  .test:hover {
+  transition: .4s;
+  background-color: rgba(0,43,54, 0.4) ;
+  border-radius: 20%;
+  }
+  .thercard {
+    transition: .4s;
+    }
+    .thercard:hover {
+    transition: .4s;
+    background-color: rgba(142,160,164, 0.1) ;
+    /* border-radius: 100%; */
+    }
+/* 
+  .thercard {
+    &:hover {
+      box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+      transition: all .55s ease-in-out;
+    }
+  } */
+
 @media (max-width: 700px) { 
   .thercard {
   display: grid;
   grid-template-columns: 1fr;
   flex-grow: 1;
   margin: 0 70px;
+
   }
   } 
 
