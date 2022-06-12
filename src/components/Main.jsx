@@ -75,7 +75,8 @@ export default function Main () {
     // console.log(therapists);
     
     const loaded=()=>(
-        <div>
+        <div className="test">
+
             <Routes>
                 <Route 
                     path="/"
@@ -100,6 +101,7 @@ export default function Main () {
                 />
             </Routes>
         </div>
+        
     )
     const loading=()=>(<h1>loading... </h1>)
 

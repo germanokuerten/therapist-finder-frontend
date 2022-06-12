@@ -80,10 +80,19 @@ export default function Reviews({reviews, createReview, id, deleteReview, update
     function reviewBody({review, rating}){
         return(
             <>
-            <p>{review}</p>
-            <div className="review-stars">
-            <p>{rating}</p>
+            <div className="row">
+                <div className="text-end col-10">
+                    <p><b> <u>Rating:{rating}</u> </b></p>
+                </div>
+                <div className="text-end col">
+                    
+                 </div>
+
             </div>
+            <div className="col-10">
+                <p style={{fontSize:"20px", textAlign:"left"}}>{review}</p>
+            </div>
+
             </>
         )
     }
@@ -126,21 +135,30 @@ export default function Reviews({reviews, createReview, id, deleteReview, update
         return switcher.boolean && switcher.id == reviewId
     }
     //changes
-    
+
 
     return(
         <div className="review-wrapper">
-            <h1>Reviews</h1>
+            {/* <h1>Reviews</h1> */}
             {reviews.map((review,i)=>{
                 return(
-                    <div key={i} className="review-card">
-                        {/* if button is clicked render form else render reviewBody */}
-                        {/* if review_id === the id of switcher render  */}
+                    <div key={i} className="row">
 
                         { editSpecificReviewRendering(review._id) ? reviewEditForm(review) :reviewBody(review) }
-                        <button onClick={()=>{handleRender(review)}}>edit</button>
-                        <button onClick={()=>{handleDelete(review._id)}}>delete</button>
+ 
+
+                        <div className="col">
+                        <button style={{margin:"10px"}} type="button" class="btn btn-success" onClick={()=>{handleRender(review)}}>edit</button>
+                        <button type="button" class="btn btn-warning" onClick={()=>{handleDelete(review._id)}}>delete</button>
+                        </div>
+                        <hr></hr>
                     </div>
+                    
+                    
+
+
+
+
                 )
             })}
             <br />
