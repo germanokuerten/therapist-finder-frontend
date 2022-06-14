@@ -22,7 +22,7 @@ function App() {
   //     console.log("no user");
   //   }
   // }
-  console.log(userDB)
+  console.log("main userDB",userDB)
 
 
   const getUserDB = async (sub) =>{

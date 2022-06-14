@@ -27,7 +27,7 @@ export default function Main ({userDB}) {
     // }
     const createReview = async (id,reviewData)=>{
         console.log("this",reviewData.reviewedBy)
-         await console.log(`${url}therapists/review/${id}/user/${reviewData.reviewedBy}`)
+        //  await console.log(`${url}therapists/review/${id}/user/${reviewData.reviewedBy}`)
         try {
             await fetch(`${url}therapists/review/${id}/user/${reviewData.reviewedBy}`,{
                 method: 'POST',

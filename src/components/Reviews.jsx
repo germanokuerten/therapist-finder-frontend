@@ -9,7 +9,7 @@ export default function Reviews({
   userDB
 }) {
   // let switcher = false
-  // console.log(userDB._id)
+  console.log(userDB._id)
   const [switcher, setSwitcher] = useState({
     boolean: false,
     id: "",
