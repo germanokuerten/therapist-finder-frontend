@@ -6,6 +6,7 @@ export default function Show({
   createReview,
   deleteReview,
   updateReview,
+  userDB
 }) {
   const { id } = useParams();
 
@@ -27,15 +28,15 @@ export default function Show({
       <div className="row">
         <div className="col-4">
           <img
-            class="img-fluid"
+            className="img-fluid"
             src={therapist.portrait}
             alt={therapist.name}
           />
         </div>
         <div className="col-8" >
           <div className="list-group" style={{fontSize:"18px", textAlign:"left"}}>
-            <a
-              
+            <div 
+             
               className="list-group-item list-group-item-action flex-column align-items-start active "
             >
               <div className="d-flex w-100 justify-content-between ">
@@ -60,7 +61,7 @@ export default function Show({
               </div>
 
               <small><b>Title</b>: m.d in psychoterapy</small>
-            </a>
+            </div>
           </div>
         </div>
       </div>
@@ -95,6 +96,7 @@ export default function Show({
             createReview={createReview}
             deleteReview={deleteReview}
             updateReview={updateReview}
+            userDB={userDB}
         />
 
     </div>

@@ -6,9 +6,10 @@ export default function Reviews({
   id,
   deleteReview,
   updateReview,
+  userDB
 }) {
   // let switcher = false
-
+  // console.log(userDB._id)
   const [switcher, setSwitcher] = useState({
     boolean: false,
     id: "",
@@ -17,6 +18,7 @@ export default function Reviews({
   const [review, setReview] = useState({
     rating: "5",
     review: "",
+    reviewedBy:""
   });
 
   const [editReview, setEditReview] = useState({});
@@ -66,6 +68,7 @@ export default function Reviews({
     setReview({
       rating: "5",
       review: "",
+      reviewedBy: ""
     });
   }
 
@@ -78,19 +81,22 @@ export default function Reviews({
     });
   }
 
-  function reviewBody({ review, rating }) {
+  function reviewBody({ review, rating, reviewedBy }) {
     return (
       <>
         <div className="row">
-          <div className="text-end col-10">
-            <p>
+          <div className="text-start col-10">
+            <img className="text-start rounded-circle" style={{width: "100px"}} src={reviewedBy?.avatar} alt={reviewedBy?.name} />
+            <p>{reviewedBy?.name}</p>
+            
+          </div>
+          <div className="text-end col">
+          <p>
               <b>
-                {" "}
-                <u>Rating:{rating}</u>{" "}
+                <u>Rating:{rating}</u>
               </b>
             </p>
           </div>
-          <div className="text-end col"></div>
         </div>
         <div className="col-10">
           <p style={{ fontSize: "20px", textAlign: "left" }}>{review}</p>
@@ -151,7 +157,7 @@ export default function Reviews({
   }
 
   function editSpecificReviewRendering(reviewId) {
-    return switcher.boolean && switcher.id == reviewId;
+    return switcher.boolean && switcher.id === reviewId;
   }
   //changes
 
@@ -161,6 +167,7 @@ export default function Reviews({
       {reviews.map((review, i) => {
         return (
           <div key={i} className="row">
+            
             {editSpecificReviewRendering(review._id)
               ? reviewEditForm(review)
               : reviewBody(review)}
@@ -231,6 +238,8 @@ export default function Reviews({
               <option value="4">4</option>
               <option value="5">5</option>
             </select>
+            
+            <input type="hidden" name="reviewedBy" value={review.reviewedBy = userDB._id}/>
             <br />
             <button className="btn btn-primary" type="submit">
               Submit

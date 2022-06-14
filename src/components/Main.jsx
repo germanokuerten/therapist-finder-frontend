@@ -5,10 +5,13 @@ import Show from "../pages/Show"
 import Landing from "../pages/Landing"
 import About from "../pages/About"
 
-export default function Main () {
+export default function Main ({userDB}) {
+
+
     const [therapists,setTherapists]=useState(null)
-    // const url = "http://localhost:3001/"
-    const url="https://therapist-rojas.herokuapp.com/"
+    // if(therapists)console.log(therapists[0])
+    const url = "http://localhost:3001/"
+    // const url="https://therapist-rojas.herokuapp.com/"
     
     const getTherapists= async () =>{
         const data= await fetch(url+"therapists").then(res => res.json())
@@ -23,9 +26,10 @@ export default function Main () {
     //     await console.log(`${url}therapists/review/${id}`)
     // }
     const createReview = async (id,reviewData)=>{
-         await console.log(`${url}therapists/review/${id}`)
+        console.log("this",reviewData.reviewedBy)
+         await console.log(`${url}therapists/review/${id}/user/${reviewData.reviewedBy}`)
         try {
-            await fetch(`${url}therapists/review/${id}`,{
+            await fetch(`${url}therapists/review/${id}/user/${reviewData.reviewedBy}`,{
                 method: 'POST',
                 headers: {
                     'Content-Type' : 'Application/json'
@@ -93,6 +97,7 @@ export default function Main () {
                                 createReview={createReview}
                                 deleteReview={deleteReview}
                                 updateReview={updateReview}
+                                userDB={userDB}
                             />}
                 />
                 <Route 
