@@ -11,7 +11,7 @@
   <p align="center">
     <p>Find a local Therapist today!</p>
 	A Cloud Database of Therapists Around the Country!<br />
-    <a href="https://github.com/Kmachappy/Runners-Page"><strong>Live Website (Frontend) - Therapist Finder</strong></a> <br/>
+    <a href=""><strong>Live Website (Frontend) - Therapist Finder</strong></a> <br/>
       <a href="https://therapist-finder-backend.herokuapp.com/therapists/"><strong>Live Website (Backend) - Therapist Finder</strong></a>
     <br/><br/>
 	CRUD Web Application built on <br/>
