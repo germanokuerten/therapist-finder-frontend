@@ -1,71 +1,198 @@
-# Getting Started with Create React App
+<br />
+<div align="center">
+  <a href="https://github.com/germanokuerten/therapist-finder-frontend">
+    <img src="https://i.imgur.com/pPryUdg.png?1" alt="Logo" width="250" height="150">
+  </a>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<a href="https://github.com/germanokuerten/therapist-finder-frontend">
+<h3 align="center">Therapist Finder</h3>
+</a> 
 
-## Available Scripts
+  <p align="center">
+    <p>Find a local Therapist today!</p>
+	A Cloud Database of Therapists Around the Country!<br />
+    <a href="https://github.com/Kmachappy/Runners-Page"><strong>Live Website (Frontend) - Therapist Finder</strong></a> <br/>
+      <a href="https://therapist-finder-backend.herokuapp.com/therapists/"><strong>Live Website (Backend) - Therapist Finder</strong></a>
+    <br/><br/>
+	CRUD Web Application built on <br/>
+    <a href="https://nodejs.org/en/">Node.js</a>
+    ·
+    <a href="https://expressjs.com/">Express</a>
+    ·
+    <a href="https://www.mongodb.com/">MongoDB</a>
+    ·
+    <a href="https://reactjs.org/">React</a>
+    ·
+    <a href="https://oauth.net/2/">React Google Login</a>
+  </p>
+</div>
 
-In the project directory, you can run:
+# About
+Description            |  Screenshot
+:---:|:----:
+| <p align="left">- A cloud based web application that displays a directory of therapists where users can view and leave comments on individual therapists. <br> - Users will be able to explore therapists and view details regarding their specialties, location, background, and reviews from previous patients! <br> - Users can leave a review o therapists they have worked with previously! <br></p> | ![](https://i.imgur.com/sqM2O5p.png) | 
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-### `npm run build`
+# Functionality
+- In this app we will access a database of therapists and display them on the index page
+- User will Be able to view a directory of therapists and browse any for full information
+- User will be able to sign in and leave comments on any therapist
+- if user is logged in they can
+        - add reviews to any therapist
+        - edit any of their reviews on a therapist
+        - delete any of their reviews on a therapist
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Routes
+```
+- get '/user/:googleId' --> allows user to sign in with their google account to acess features on page
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- post '/user' --> adds new user to db
 
-### `npm run eject`
+- get '/' --> renders home page
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- get '/seed' -->  deletes all entries in mongodb and creates a news entries with seed data
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- get '/therapists' --> renders index page ofall therapists
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- get '/therapists/:id' --> renders show page and passes through users, event, and currently logged, as well as reference to other schemas in user variables, allow user to see db entry in full allow
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- post '/therapists' --> will push new data to db and redirect back to index page
 
-## Learn More
+- delete '/therapists/:id' --> will delete db entry based on id of the db entry
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- put '/therapists/:id' --> will update db entry based on id  of the db entry
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- post '/therapists/review/:therapistId/user/:userId' --> pushes review schema into therapist and user redirects to show page 
 
-### Code Splitting
+- delete '/therapists/review/:therapistId/:reviewId/' --> deletes review from user and therapist
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
 
-### Analyzing the Bundle Size
+# Models/Schema 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Therapist/Review Schema:
+```
+const reviewSchema = new Schema({
+    rreview: { type: String, require: true },
+rating: { type: Number, min: 1, max: 5, default: 5, require: true },
+    reviewedBy: { 
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: false }
+    },
+    {timestamps: true}
+)
 
-### Making a Progressive Web App
+const therapistSchema = new mongoose.Schema({
+    name:{ type: String, unique: true, required: true },
+    description:{ type: String, required: true },
+    portrait:{ type: String, required: true  },
+    address:{ type: String, required: true
+    },
+    phoneNumber:{ type: String, match: /^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/, required: true },
+    tags:[String],
+    latlng:[String],
+    reviews: [reviewSchema]
+})
+```
+User Schema:
+```
+const userSchema = new mongoose.Schema({
+    name:{ type: String, required: true },
+    email:{ type: String, required: true, unique: true },
+    password:{ type: String, required: false },
+    phone:{ type: String, match: /^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/, required: false },
+    avatar:{ type: String, required: false },
+    googleId:{ type: String, required: true },
+    reviewedTherapists: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Therapist'
+    }]
+})
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+# Current State
 
-### Advanced Configuration
+- User is currently able to visit the site and see a directory of therapists
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- User is able to log in through React Google Login
 
-### Deployment
+- User is able to click on any of the therapists displayed to view their full information
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- If user is logged in thier comment will reflect their Google user information
 
-### `npm run build` fails to minify
+- User will be able to see all comments on each therapist
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# therapist-finder-frontend
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+
+
+# Roadmap and Future Implementations
+
+- Allow users to only edit and delete only their comments
+
+- Allow users to view a list of their comments and the therapists they have reviews in one centralized page
+
+- Allow users to sort therapists by tags
+
+- Allow user to create their own profile
+
+-Allow users to leave a star rating that creates an average rating for the therapist
+
+
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+# User Story
+
+- As a user, I should be able to see directory of Therapists on Index 
+
+- As a user, I should be able to click any of the therapists for their full description/data on index page
+
+- As a user, On the show page I should be able to see all of the therapist's data
+
+- As a user, On the show page I should be able add a review for the therpaist
+
+- As a user, I should be able to log in  on the header and view and edit my reviews
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+# Technologies used 
+
+- HTML
+- CSS
+- JavaScript
+- Google Fonts
+- Heroku
+- Express
+- Netlify
+- React
+- MongoDB
+- Mongoose
+- Bootstrap
+- Node
+- React Google Login
+
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+# Therapist Finder WireFrame and ERD
+
+## ERD
+![Model](https://i.imgur.com/dQXQMFo.png)
+
+## Wireframes
+![Index Page](https://i.imgur.com/mitheam.png)
+![Show Page](https://i.imgur.com/OxamYvs.png)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
