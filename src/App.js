@@ -11,8 +11,8 @@ function App() {
 
   const [user, setUser] = useState({})
   const [userDB, setUserDB] = useState({})
-  const url = "http://localhost:3001/"
-  // const url="https://therapist-rojas.herokuapp.com/"
+  // const url = "http://localhost:3001/"
+  const url="https://therapist-finder-backend.herokuapp.com/"
   // console.log("this is user",user)
  
   // function createUser(e){
@@ -23,7 +23,6 @@ function App() {
   //   }
   // }
   console.log("main userDB",userDB)
-
 
   const getUserDB = async (sub) =>{
     console.log(url+"user/"+sub)
@@ -44,9 +43,6 @@ function App() {
        console.log(error)
    }
 }
-
-
-
 
   function handleCallbackResponse(res){
     
