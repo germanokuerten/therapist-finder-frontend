@@ -38,7 +38,7 @@ export default function Landing(){
       <img src="https://images.unsplash.com/photo-1520962880247-cfaf541c8724?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80" alt="New York" class="d-block w-100"/>
       <div class="carousel-caption">
       <h3>Therapist Finder</h3>
-      <p>You deserve a better life!</p>
+      <p>Find a great match!</p>
       <Link to="/therapists">
       <button className="btn btn-primary">Find Your Therapist</button>
       </Link>
