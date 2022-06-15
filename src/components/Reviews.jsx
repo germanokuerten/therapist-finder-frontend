@@ -130,6 +130,7 @@ export default function Reviews({
               </div>
             </div>
 
+
             <div className="col text-start">
               <label htmlFor="exampleSelect1" className="form-label mt-2 ">
                 <h2>Rating </h2>
@@ -148,6 +149,7 @@ export default function Reviews({
                 <option value="5">5</option>
               </select>
             </div>
+
             <br />
             <button className="btn btn-primary" type="submit">Submit</button>
           </form>
