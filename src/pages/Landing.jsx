@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom'
 
 export default function Landing(){
     return(
-      // <!-- Carousel -->
+      <>
+      {/* <!-- Carousel --> */}
 <div id="demo" class="carousel slide" data-bs-ride="carousel">
 
   {/* <!-- Indicators/dots --> */}
@@ -54,5 +55,12 @@ export default function Landing(){
     <span class="carousel-control-next-icon"></span>
   </button>
 </div>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  
+</>
+
     )
 }
