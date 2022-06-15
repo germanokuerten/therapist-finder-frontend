@@ -6,9 +6,9 @@ export default function Nav ({user,handleSignOut}) {
             <div className="container-fluid">
               
             <Link className="navbar-brand text-start w-75" to="/">
-                <img src="https://i.imgur.com/TmCE95T.png" style={{maxWidth:"4.6em", marginLeft:"1em"}} />
+                <img src="https://i.imgur.com/pPryUdg.png?1" style={{maxWidth:"4.6em", marginLeft:"1em"}} />
 
-            Therapist finder
+            
             </Link>
             <button className="navbar-toggler float-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
