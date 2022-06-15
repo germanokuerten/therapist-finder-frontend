@@ -79,14 +79,14 @@ function App() {
 
   useEffect(()=>{
     /*global google*/
-    google.accounts.id.initialize({
+    google?.accounts.id.initialize({
       client_id: "87317623296-92up46c8k7kv5pe63ert0qb7893jq87r.apps.googleusercontent.com",
       callback: handleCallbackResponse
     });
 
-    google.accounts.id.renderButton(
+    google?.accounts.id.renderButton(
       document.getElementById("signInDiv"),
-      { type:"text", theme: "outline", size: "large"}
+      { type: "standard", theme: "outline", text: "signin", shape: "circle", size: "medium"}
     );
 
     // createUser();
@@ -98,7 +98,7 @@ function App() {
 
   return (
     <div className="App">  
-    <div>
+    {/* <div>
       <div  id="signInDiv"></div>
       { Object.keys(user).length != 0 &&
       <button onClick={(e)=> handleSignOut(e)}> signout </button>
@@ -110,10 +110,10 @@ function App() {
         </div>
 
       }
-    </div>
-      <Header />
-      <br/>
-      <br/>
+    </div> */}
+      <Header user={user}
+              handleSignOut={handleSignOut}/>
+     
       <Main userDB={userDB}/>
       <br/>
       <br/>

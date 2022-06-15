@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-export default function Nav () {
+export default function Nav ({user,handleSignOut}) {
 
     return (
         <nav className="row navbar navbar-expand-lg navbar-light bg-light ">
@@ -32,6 +32,19 @@ export default function Nav () {
                             </Link>
                         </li>
                     </ul>
+                    <div>
+                    <div id="signInDiv" className="nav-link test"></div>
+                    { Object.keys(user).length != 0 &&
+                    <button onClick={(e)=> handleSignOut(e)}> signout </button>
+                    }
+                    { user &&
+                        <div>
+                        <img src={user.picture} alt="" />
+                        <h3>{user.name}</h3>
+                        </div>
+
+                        }
+                    </div>
                 </div>
             </div>
         </nav>
