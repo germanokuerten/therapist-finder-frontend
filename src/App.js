@@ -100,7 +100,7 @@ function App() {
     <div className="App">  
     <div>
       <div  id="signInDiv"></div>
-      { Object.keys(user).length != 0 &&
+      { Object.keys(user).length !== 0 &&
       <button onClick={(e)=> handleSignOut(e)}> signout </button>
       }
       { user &&
