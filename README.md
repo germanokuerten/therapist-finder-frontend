@@ -12,8 +12,12 @@
     <p>Find a local Therapist today!</p>
 	A Cloud Database of Therapists Around the Country!<br />
     <a href="https://bejewelled-cobbler-a0ab0a.netlify.app"><strong>Live Website (Frontend) - Therapist Finder</strong></a> <br/>
+	 <a href="https://github.com/germanokuerten/therapist-finder-frontend"><strong> GitHub Link (Frontend) - Therapist Finder</strong></a> <br/>
       <a href="https://therapist-finder-backend.herokuapp.com/therapists/"><strong>Live Website (Backend) - Therapist Finder</strong></a>
-    <br/><br/>
+    <br/>
+	 <a href="https://github.com/briannag31/therapist-finder-backend"><strong> GitHub Link (Backend) - Therapist Finder</strong></a>
+    <br/>
+	<br/>
 	CRUD Web Application built on <br/>
     <a href="https://nodejs.org/en/">Node.js</a>
     ·
